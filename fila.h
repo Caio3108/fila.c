@@ -6,13 +6,13 @@
         //mais 3 campos
         char nome[50], compromisso[100];
         int idade;
-        NO *proximo, *anterior;
+        struct NO *proximo, *anterior;
     } Amigo;
     
-    Amigo *criação(Amigo **);
-    int testVazia(Amigo **);
-    Amigo *Enfileirar(Amigo **);
-    Amigo *Desenfileirar(Amigo **);
+    Amigo *criação(Amigo *);
+    int testVazia(Amigo *);
+    Amigo *Enfileirar(Amigo *, char *);
+    Amigo Desenfileirar(Amigo **);
     Amigo *Esvaziar(Amigo **);
     Amigo *Desalocar(Amigo **);
     Amigo *Imprimir(Amigo **);

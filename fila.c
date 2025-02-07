@@ -1,6 +1,7 @@
 #include "fila.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 Amigo *criação(Amigo *inicio){
     inicio = malloc(sizeof(Amigo));
@@ -41,4 +42,22 @@ Amigo *Enfileirar(Amigo *final, char *entrada){
     nFinal->anterior = final;
     final = nFinal;
     return final;
+}
+
+Amigo Desenfileirar(Amigo **final)
+{
+    if (testVazia(*final == 0))
+    {
+        Amigo copia, *anterior = ((*final)->proximo)->anterior;
+        anterior = NULL;
+        strcpy(copia.compromisso, (*final)->compromisso);
+        copia.idade = (*final)->idade;
+        strcpy(copia.nome, (*final)->nome);
+
+        free(*final);
+        *final = ((*final)->proximo)->anterior;
+        return copia;
+    }
+    
+    
 }
