@@ -20,28 +20,48 @@ int testVazia(Amigo *final) {
 }
 
 Amigo *Enfileirar(Amigo *final, char *entrada){
+    Amigo *nFinal = NULL;
     if (final == NULL)
     {
         final = criação(final);
     }
-    
-    Amigo *nFinal = NULL;
-    nFinal = malloc(sizeof(Amigo)); 
-    FILE *fs = NULL;
-    fs = fopen(entrada, "r");
-    if (fs == NULL)
+    if (testVazia(final) == 0)
     {
-        printf("erro\n");
-        return;
+        
+        nFinal = malloc(sizeof(Amigo)); 
+        FILE *fs = NULL;
+        fs = fopen(entrada, "r");
+        if (fs == NULL)
+        {
+            printf("erro\n");
+            return;
+        }
+        
+
+        fscanf(fs , "%s,%d,%s", nFinal->nome, &nFinal->idade, nFinal->compromisso); // add campos
+        fclose(fs);
+        final->proximo = nFinal;
+        nFinal->anterior = final;
+        final = nFinal;
+        return final;
+    }
+    else
+    {
+        FILE *fs = NULL;
+        fs = fopen(entrada, "r");
+        if (fs == NULL)
+        {
+            printf("erro\n");
+            return;
+        }
+        
+
+        fscanf(fs , "%s,%d,%s", final->nome, &final->idade, final->compromisso); // add campos
+        fclose(fs);
+        return final;
     }
     
-
-    fscanf(fs , "%s %d %s", nFinal->nome, &nFinal->idade, nFinal->compromisso); // add campos
-    fclose(fs);
-    final->proximo = nFinal;
-    nFinal->anterior = final;
-    final = nFinal;
-    return final;
+    
 }
 
 Amigo Desenfileirar(Amigo **final)
