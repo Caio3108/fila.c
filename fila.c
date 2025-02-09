@@ -101,3 +101,13 @@ Amigo *Desalocar(Amigo **final)
 {
     return Esvaziar(final);
 }
+
+void Imprimir(Amigo *final)
+{
+    Amigo *atual = final;
+    while (atual != NULL)
+    {
+        printf("Nome: %s, Idade: %d, Compromisso: %s\n", atual->nome, atual->idade, atual->compromisso);
+        atual = atual->anterior;
+    }
+}
