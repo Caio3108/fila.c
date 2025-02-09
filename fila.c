@@ -96,3 +96,8 @@ Amigo *Esvaziar(Amigo **final)
     }
     return NULL;
 }
+
+Amigo *Desalocar(Amigo **final)
+{
+    return Esvaziar(final);
+}
