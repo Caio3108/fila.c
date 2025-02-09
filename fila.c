@@ -85,3 +85,14 @@ Amigo Desenfileirar(Amigo **final)
     }
     
 }
+
+Amigo *Esvaziar(Amigo **final)
+{
+    while (*final != NULL)
+    {
+        Amigo *temp = *final;
+        *final = (*final)->anterior;
+        free(temp);
+    }
+    return NULL;
+}
