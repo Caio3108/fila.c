@@ -13,23 +13,23 @@ int main() {
     while (1)
     {
         scanf("%d", &instrucao);
+        if (instrucao == 4)
+            break;
         switch (instrucao)
         {
         case 1: // Enfileira
             Enfileirar(fila, arquivo); /*mudar para nome fixo*/
             break;
         case 2: // Desenfileira
-            Desenfileirar(fila);
+            Desenfileirar(&fila);
             break;
         case 3: // Salva no arquivo
             /* code */
             break;
-        case 4: // Fecha
-
-            break;
         }
-        
     }
+    
+    
     
     
     

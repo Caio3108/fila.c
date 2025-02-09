@@ -9,7 +9,7 @@
         struct NO *proximo, *anterior;
     } Amigo;
     
-    Amigo *criação(Amigo *);
+    Amigo *criacao(Amigo *);
     int testVazia(Amigo *);
     Amigo *Enfileirar(Amigo *, char *);
     Amigo Desenfileirar(Amigo **);

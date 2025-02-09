@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-Amigo *criação(Amigo *inicio){
+Amigo *criacao(Amigo *inicio){
     inicio = malloc(sizeof(Amigo));
     inicio->proximo = NULL;
     inicio->anterior = NULL;
@@ -23,7 +23,7 @@ Amigo *Enfileirar(Amigo *final, char *entrada){
     Amigo *nFinal = NULL;
     if (final == NULL)
     {
-        final = criação(final);
+        final = criacao(final);
     }
     if (testVazia(final) == 0)
     {
@@ -34,11 +34,11 @@ Amigo *Enfileirar(Amigo *final, char *entrada){
         if (fs == NULL)
         {
             printf("erro\n");
-            return;
+            return final;
         }
         
 
-        fscanf(fs , "%s,%d,%s", nFinal->nome, &nFinal->idade, nFinal->compromisso); // add campos
+        fscanf(fs , "%s ,%d ,%s", nFinal->nome, &nFinal->idade, nFinal->compromisso); // add campos
         fclose(fs);
         final->proximo = nFinal;
         nFinal->anterior = final;
@@ -52,7 +52,7 @@ Amigo *Enfileirar(Amigo *final, char *entrada){
         if (fs == NULL)
         {
             printf("erro\n");
-            return;
+            return final;
         }
         
 
@@ -66,7 +66,7 @@ Amigo *Enfileirar(Amigo *final, char *entrada){
 
 Amigo Desenfileirar(Amigo **final)
 {
-    if (testVazia(*final == 0))
+    if (testVazia(*final) == 0)
     {
         Amigo copia, *anterior = ((*final)->proximo)->anterior;
         anterior = NULL;
@@ -75,9 +75,13 @@ Amigo Desenfileirar(Amigo **final)
         strcpy(copia.nome, (*final)->nome);
 
         free(*final);
-        *final = ((*final)->proximo)->anterior;
+        *final = anterior;
         return copia;
     }
-    
+    else
+    {
+        printf("Fila Vazia\n");
+        return **final;
+    }
     
 }
