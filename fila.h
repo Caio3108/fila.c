@@ -3,7 +3,8 @@
 
     typedef struct NO
     {
-        //mais 3 campos
+        int dia;
+        int horario;
         char nome[50], compromisso[100];
         int idade;
         struct NO *proximo, *anterior;
@@ -13,9 +14,10 @@
     int testVazia(Amigo *);
     Amigo *Enfileirar(Amigo *, char *);
     Amigo Desenfileirar(Amigo **);
-    Amigo *Esvaziar(Amigo **);
-    Amigo *Desalocar(Amigo **);
-    Amigo *Imprimir(Amigo **);
+    Amigo *Esvaziar(Amigo *);
+    Amigo *Desalocar(Amigo *);
+    void Imprimir(Amigo *);
+    void Salvar(Amigo *, char *);
 
 
 
