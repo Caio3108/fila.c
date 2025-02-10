@@ -3,17 +3,17 @@
 
     typedef struct NO
     {
-        int dia;
-        int horario;
+        char dia[6];
+        char horario[4];
         char nome[50], compromisso[100];
-        int idade;
+        char idade[3];
         struct NO *proximo, *anterior;
     } Amigo;
     
     Amigo *criacao(Amigo *);
     int testVazia(Amigo *);
-    Amigo *Enfileirar(Amigo *, char *);
-    Amigo Desenfileirar(Amigo **);
+    Amigo *Enfileirar(Amigo *, char *, int num);
+    Amigo *Desenfileirar(Amigo **);
     Amigo *Esvaziar(Amigo *);
     Amigo *Desalocar(Amigo *);
     void Imprimir(Amigo *);

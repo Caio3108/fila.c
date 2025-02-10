@@ -19,73 +19,54 @@ int testVazia(Amigo *final) {
     return r;
 }
 
-Amigo *Enfileirar(Amigo *final, char *entrada){
-    Amigo *nFinal = NULL;
-    if (final == NULL)
-    {
-        final = criacao(final);
-    }
-    if (testVazia(final) == 0)
-    {
+Amigo *Desenfileirar(Amigo **final) {
+    if (testVazia(*final) == 0) {
+        Amigo *removido = *final;
+        Amigo *anterior = (*final)->anterior; 
         
-        nFinal = malloc(sizeof(Amigo)); 
-        FILE *fs = NULL;
-        fs = fopen(entrada, "r");
-        if (fs == NULL)
-        {
-            printf("erro\n");
-            return final;
+        if (anterior != NULL) {
+            anterior->proximo = NULL;
         }
-        
-
-        fscanf(fs , "%s, %d, %s, %d, %d", nFinal->nome, &nFinal->idade, nFinal->compromisso, &nFinal->dia, &nFinal->horario); // add campos
-        fclose(fs);
-        final->proximo = nFinal;
-        nFinal->anterior = final;
-        final = nFinal;
-        return final;
+        *final = anterior;
+        return removido;
+    } else {
+        printf("Fila Vazia\n");
+        return NULL;
     }
-    else
-    {
-        FILE *fs = NULL;
-        fs = fopen(entrada, "r");
-        if (fs == NULL)
-        {
-            printf("erro\n");
-            return final;
-        }
-        
-
-        fscanf(fs , "%s, %d, %s, %d, %d", final->nome, &final->idade, final->compromisso, &final->dia, &final->horario); // add campos
-        fclose(fs);
-        return final;
-    }
-    
-    
 }
 
-Amigo Desenfileirar(Amigo **final)
-{
-    if (testVazia(*final) == 0)
-    {
-        Amigo copia, *anterior = ((*final)->proximo)->anterior;
-        anterior = NULL;
-        strcpy(copia.compromisso, (*final)->compromisso);
-        copia.idade = (*final)->idade;
-        strcpy(copia.nome, (*final)->nome);
-        copia.idade = (*final)->dia;
-        copia.idade = (*final)->horario;
+Amigo *Enfileirar(Amigo *final, char *entrada, int num) {
+    Amigo *nFinal = malloc(sizeof(Amigo));
+    if (nFinal == NULL) {
+        printf("Erro ao alocar memória.\n");
+        return final;
+    }
 
-        free(*final);
-        *final = anterior;
-        return copia;
+    printf("Escreva 1 caso queira ler do txt, Escreva 0 caso queira adicionar um novo!\n");
+    scanf("%d", &num);
+
+    if (num == 0) {
+        printf("Coloque o nome, idade, compromisso, dia e hora:\n");
+        scanf("%s %s %s %s %s", nFinal->nome, nFinal->idade, nFinal->compromisso, nFinal->dia, nFinal->horario);
+    } else {
+        FILE *fs = fopen(entrada, "r");
+        if (fs == NULL) {
+            printf("Erro ao abrir o arquivo.\n");
+            free(nFinal);
+            return final;
+        }
+        fscanf(fs, "%[^,], %[^,], %[^,], %[^,], %[^,]", nFinal->nome, nFinal->idade, nFinal->compromisso, nFinal->dia, nFinal->horario);
+        fclose(fs);
     }
-    else
-    {
-        printf("Fila Vazia\n");
-        return **final;
+
+    nFinal->anterior = final;
+    nFinal->proximo = NULL;
+
+    if (final != NULL) {
+        final->proximo = nFinal;
     }
-    
+
+    return nFinal;
 }
 
 Amigo *Esvaziar(Amigo *final)
@@ -110,7 +91,7 @@ void Imprimir(Amigo *final)
     Amigo *atual = final;
     while (atual != NULL)
     {
-        printf("Nome: %s, Idade: %d, Compromisso: %s\n, Dia: %d\n, Horario: %d\n", atual->nome, atual->idade, atual->compromisso, atual->dia, atual->horario);
+        printf("Nome: %s, Idade: %s, Compromisso: %s\n, Dia: %s\n, Horario: %s\n", atual->nome, atual->idade, atual->compromisso, atual->dia, atual->horario);
         atual = atual->anterior;
     }
 }
@@ -126,7 +107,7 @@ void Salvar(Amigo *inicio, char *entrada) {
 
     Amigo *atual = inicio;
     while (atual != NULL) {
-        fprintf(fs,"Nome : %s, Idade: %d, Compromisso: %s, Dia: %d, Horario: %d\n", atual->nome,  atual->idade, atual->compromisso, atual->dia, atual->horario);
+        fprintf(fs,"%s, %s, %s, %s, %s\n", atual->nome,  atual->idade, atual->compromisso, atual->dia, atual->horario);
         atual = atual->proximo;
     }
 

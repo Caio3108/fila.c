@@ -1,5 +1,7 @@
-// Caio de Oliveira Muniz
-//Guilherme Malard Frezzolino Pereira
+// Caio de Oliveira Muniz: 20242006337
+//Guilherme Malard Frezzolino Pereira 20242006103
+//Francisco E. N. Mesquita. matricula: 20242011266
+//https://github.com/Caio3108/fila.c/tree/main
 #include "fila.h"
 #include <stdlib.h>
 #include <string.h>
@@ -17,7 +19,8 @@ int main() {
         switch (instrucao)
         {
         case 1: // Enfileira
-            Enfileirar(fila, arquivo); /*mudar para nome fixo*/
+            int num = 0;
+            fila = Enfileirar(fila, arquivo, num); /*mudar para nome fixo*/
             printf("Enfileirado com sucesso!\n");
             break;
         case 2: // Desenfileira
